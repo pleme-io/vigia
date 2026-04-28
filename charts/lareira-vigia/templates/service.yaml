@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "lareira-vigia.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "lareira-vigia.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "lareira-vigia.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: auth
+      port: 9000
+      targetPort: auth

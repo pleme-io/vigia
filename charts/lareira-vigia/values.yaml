@@ -1,0 +1,54 @@
+# lareira-vigia values
+#
+# One HelmRelease per cluster. The cluster's HelmRelease MUST set
+# .cluster and .location to its own identity (the chart fails to
+# render otherwise — see _helpers.tpl validate macro).
+
+enabled: true
+
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: ghcr.io/pleme-io/vigia
+  tag: ""
+  pullPolicy: IfNotPresent
+
+# Cluster identity — REQUIRED, no defaults.
+cluster: ""        # e.g., "rio"
+location: ""       # e.g., "bristol"
+
+# Saguão control-plane endpoints — fleet constants.
+passaporteUrl: "https://auth.quero.cloud"
+crachaUrl: "http://cracha.cracha.svc.cluster.local:50051"   # in-cluster on the control-plane cluster
+
+decisionTtlSecs: 300
+jwtCacheSize: 1024
+staleOkSecs: 0
+audience: "saguao"
+
+# Break-glass mode — bypass crachá entirely for the family group on
+# control-plane outages. Gated by an in-cluster Secret. Default off.
+breakGlass:
+  enabled: false
+  secretName: vigia-break-glass
+
+replicas: 2          # forward-auth is critical-path; HA recommended
+
+logLevel: "info"
+
+serviceAccount:
+  create: true
+  name: ""
+
+resources:
+  requests:
+    cpu: "20m"
+    memory: "32Mi"
+  limits:
+    cpu: "200m"
+    memory: "128Mi"
+
+serviceMonitor:
+  enabled: true
+  interval: 30s

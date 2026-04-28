@@ -1,0 +1,57 @@
+[package]
+name = "vigia"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.89.0"
+license = "MIT"
+repository = "https://github.com/pleme-io/vigia"
+authors = ["pleme-io <ops@pleme.io>"]
+description = "Per-cluster forward-auth data plane for the saguão fleet"
+
+[[bin]]
+name = "vigia"
+path = "src/main.rs"
+
+[lib]
+path = "src/lib.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+thiserror = "2"
+anyhow = "1"
+tokio = { version = "1", features = ["full"] }
+axum = "0.8"
+tower = "0.5"
+tower-http = { version = "0.6", features = ["trace"] }
+http = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+prometheus = "0.13"
+clap = { version = "4", features = ["derive", "env"] }
+futures = "0.3"
+moka = { version = "0.12", features = ["future"] }
+url = "2"
+jsonwebtoken = "9"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+tonic = "0.13"
+prost = "0.13"
+cracha-core  = { path = "../cracha/crates/cracha-core" }
+cracha-proto = { path = "../cracha/crates/cracha-proto", optional = true }
+
+[features]
+# Default off so the scaffold compiles without the cracha-proto git
+# dep being resolvable in offline environments. Enable in production:
+#   cargo build --features cracha-grpc
+default = []
+cracha-grpc = ["dep:cracha-proto"]
+
+[lints.clippy]
+pedantic = "warn"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "z"
+strip = true

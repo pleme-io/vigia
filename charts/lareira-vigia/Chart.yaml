@@ -1,0 +1,26 @@
+apiVersion: v2
+name: lareira-vigia
+description: |
+  vigia — per-cluster forward-auth for the saguão fleet.
+  Deploys a small Rust HTTP service that ingress-nginx subrequests
+  for every gated request. Validates OIDC JWTs from passaporte;
+  queries crachá for the authz decision; returns 200/401/403.
+  One HelmRelease per cluster.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+home: https://github.com/pleme-io/vigia
+sources:
+  - https://github.com/pleme-io/vigia
+maintainers:
+  - name: pleme-io
+    email: ops@pleme.io
+keywords:
+  - saguao
+  - forward-auth
+  - oidc
+  - homelab
+dependencies:
+  - name: pleme-lib
+    version: "0.1.x"
+    repository: oci://ghcr.io/pleme-io/charts

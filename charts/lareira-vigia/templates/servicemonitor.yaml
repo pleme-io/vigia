@@ -1,0 +1,17 @@
+{{- if .Values.serviceMonitor.enabled }}
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMServiceScrape
+metadata:
+  name: {{ include "lareira-vigia.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "lareira-vigia.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "lareira-vigia.selectorLabels" . | nindent 6 }}
+  endpoints:
+    - port: auth
+      interval: {{ .Values.serviceMonitor.interval }}
+      path: /metrics
+{{- end }}
