@@ -1,0 +1,6 @@
+dependencies:
+- name: pleme-lib
+  repository: oci://ghcr.io/pleme-io/charts
+  version: 0.13.1
+digest: sha256:1e5ff7fb90e1b4535d42ece7acdbb1b2ce5e0748a749a866fde6256297c768dc
+generated: "2026-05-02T23:03:07.069363-04:00"
