@@ -7,7 +7,7 @@ description: |
   queries crachá for the authz decision; returns 200/401/403.
   One HelmRelease per cluster.
 type: application
-version: 0.1.0
+version: "0.2.0"
 appVersion: "0.1.0"
 home: https://github.com/pleme-io/vigia
 sources:

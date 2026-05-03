@@ -1,3 +1,4 @@
+{{- if .Values.enabled }}
 {{- if .Values.serviceMonitor.enabled }}
 apiVersion: operator.victoriametrics.com/v1beta1
 kind: VMRule
@@ -31,4 +32,5 @@ spec:
           annotations:
             summary: "vigia on {{ .Values.cluster }} cannot reach crachá"
             description: "If this persists, consider enabling stale-OK fallback or break-glass mode per SAGUAO.md §VI.3."
+{{- end }}
 {{- end }}
