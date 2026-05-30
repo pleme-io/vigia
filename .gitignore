@@ -5,3 +5,4 @@ result-*
 .envrc.local
 *.swp
 .DS_Store
+Cargo.build-spec.json
