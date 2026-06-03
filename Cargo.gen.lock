@@ -9193,7 +9193,7 @@
     }
   },
   "git_nar_sha256": {
-    "cracha-core-0.1.1": "sha256-h1XuxLzQA+Ys9Hfe/aDWOQGHfh6LarpiVqyIUTy8YnI="
+    "cracha-core-0.1.1": "sha256-ba6TTDzvmNDXYWySqUfKPYNV/1Usl+0+GtpSXhzDfHU="
   },
   "flake_metadata": {}
 }
